@@ -131,5 +131,11 @@ $(document).ready(function () {
                 value: index
             });
         }
+
+        // Calculate tax dataTable
+        $("#tax").on("click", function () {
+            console.log($table.bootstrapTable('getData'));
+            $table.bootstrapTable('getData');
+        });
     });
 });
