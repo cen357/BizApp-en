@@ -56,3 +56,29 @@ function getParsedJsonFromText(text) {
         return null;
     }
 }
+
+//get and save functions for local storage
+function saveDataToLocalStorage(dataKey, data) {
+    //NOTE: if data is json, conver to text to store.
+    let formattedData = null;
+    try {
+        formattedData = JSON.stringify(data);
+    } catch (e) {
+        //not a json, just use data as is.
+        formattedData = data;
+    }
+    window.localStorage.setItem(dataKey, formattedData);
+}
+
+function getDataFromLocalStorage(dataKey) {
+    //NOTE if data was originally json, unpack it from text to json
+    let data = window.localStorage.getItem(dataKey);
+    let formattedData = null;
+    try {
+        formattedData = JSON.parse(data);
+    } catch (e) {
+        //not a json, just use data as is.
+        formattedData = data;
+    }
+    return formattedData;
+}

@@ -131,11 +131,13 @@ $(document).ready(function () {
                 value: index
             });
         }
-
-        // Calculate tax dataTable
-        $("#tax").on("click", function () {
-            console.log($table.bootstrapTable('getData'));
-            $table.bootstrapTable('getData');
-        });
     });
+
+    // Switch over to tax datatable page
+    $("#tax").on("click", function () {
+        let taxData = $table.bootstrapTable('getData');
+        saveDataToLocalStorage("dataTable", taxData);
+        window.location.href = '../BizApp/tax.html';
+    });
+
 });

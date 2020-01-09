@@ -65,20 +65,26 @@
 
         <!--============================================== Content ===================================================-->
         <div class="container">
-            <!-- Month title -->
+            <!-- Title -->
             <div id="title" class="title text-center p-2">
                 <h1>Thuế thu nhập cá nhân</h1>
             </div>
 
             <!-- Button group -->
-
             <div class="d-flex justify-content-start align-items-center button-group">
+                <!-- Home page button -->
+                <button class="btn btn-lg btn-secondary p-2" id="back"><a class="text-light" href="index.html">
+                        Quay lại trang thông tin</a></button>
+
                 <!-- Summary button -->
-                <button class="btn btn-lg btn-secondary p-2"><a class="text-light" href="index.html">Quay lại trang
-                        thông
-                        tin</a></button>
                 <Button class="btn btn-lg btn-primary p-2" data-toggle="collapse" data-target="#summary">Tổng
                     kết</Button>
+
+                <!--  Import JSON file for dataTable -->
+                <div class="pb-0 mt-4" hidden>
+                    <label for="import">Tải lên</label>
+                    <input type="file" name="import" id="import" multiple>
+                </div>
             </div>
 
             <!-- Summary content -->
