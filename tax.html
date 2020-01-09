@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Chương trình thuế</title>
+    <title>BizApp</title>
 
     <!--===============================================> CDN links ============================================-->
     <!-- Bootstrap 4 CDN link-->
@@ -17,13 +17,7 @@
         integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
 
     <!-- Bootstrap dataTables link -->
-    <link rel="stylesheet" href="assets/lib/bootstrap-table-master/dist/bootstrap-table.min.css">
-
-    <!-- Filesaver CDN link -->
-    <script src="assets/lib/FileSaver.js-master/dist/FileSaver.min.js"></script>
-
-    <!-- Sheetjs CDN link -->
-    <script type="text/javaScript" src="assets/lib/sheetjs-master/xlsx.mini.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
     <!--=========================================== End of CDN links ============================================-->
 
     <!-- CSS links -->
@@ -57,10 +51,7 @@
                             Apps
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Chương trình 1</a>
-                            <a class="dropdown-item" href="#">Chương trình 2</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Chương trình 3</a>
+                            <a class="dropdown-item" href="tax.html">Thuế TNCN</a>
                         </div>
                     </li>
                 </ul>
@@ -74,25 +65,26 @@
 
         <!--============================================== Content ===================================================-->
         <div class="container">
-            <!-- Month title -->
-            <div id="month" class="title text-center p-2">
-                <h1>Chương trình thuế</h1>
+            <!-- Title -->
+            <div id="title" class="title text-center p-2">
+                <h1>Thuế thu nhập cá nhân</h1>
             </div>
 
             <!-- Button group -->
             <div class="d-flex justify-content-start align-items-center button-group">
-                <!-- Summary button -->
-                <button class="btn btn-info btn-lg p-2 mr-auto" type="button" data-toggle="collapse"
-                    data-target="#summary" aria-expanded="false" aria-controls="summary">
-                    Tổng hợp
-                </button>
+                <!-- Home page button -->
+                <button class="btn btn-lg btn-secondary p-2" id="back"><a class="text-light" href="index.html">
+                        Quay lại trang thông tin</a></button>
 
-                <!-- Ultilities button -->
-                <input type="file" name="import" id="import" multiple>
-                <button class="btn btn-lg btn-primary p-2" data-toggle="modal" data-target="#addModal">Thêm</button>
-                <button class="btn btn-lg btn-secondary p-2" data-toggle="modal" data-target="#editModal">Sửa</button>
-                <button class="btn btn-lg btn-danger p-2" id="remove">Xóa</button>
-                <button class="btn btn-lg btn-success p-2" id="download">Tải về máy</button>
+                <!-- Summary button -->
+                <Button class="btn btn-lg btn-primary p-2" data-toggle="collapse" data-target="#summary">Tổng
+                    kết</Button>
+
+                <!--  Import JSON file for dataTable -->
+                <div class="pb-0 mt-4" hidden>
+                    <label for="import">Tải lên</label>
+                    <input type="file" name="import" id="import" multiple>
+                </div>
             </div>
 
             <!-- Summary content -->
@@ -104,9 +96,10 @@
             </div>
 
             <!-- Data Table  -->
-            <table id="table" data-show-export="true" data-pagination="true" data-side-pagination="server"
-                data-click-to-select="true" data-toolbar="#toolbar" data-show-toggle="true" data-show-columns="true"
-                class="tabletable-striped table-bordered" style="width: 100%;">
+            <table id="taxTable" data-show-export="true" data-pagination="true" data-side-pagination="server"
+                data-click-to-select="true" data-single-select="true" data-toolbar="#toolbar" data-show-toggle="true"
+                data-show-columns="true" data-unique-id="STT" class="table table-striped table-bordered" style="width:
+                100%;">
                 <thead class="text-center table-header">
                     <tr>
                         <th data-field="state" data-checkbox="true"></th>
@@ -122,90 +115,7 @@
     </div>
     <!--====================================== End of content =================================================-->
 
-    <!--=========================================== Modals ====================================================-->
-
-    <!-- Add Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content shadow rounded">
-
-                <!-- Modal header -->
-                <div class="modal-header text-center bg-primary text-white">
-                    <h4 class="modal-title w-100 font-weight-bold">THÊM THÔNG TIN MỚI</h4>
-                    <button class="close" data-dismiss="modal" type="button">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div id="test">
-                    <div class="modal-body mx-3">
-                        <!-- Name input -->
-                        <div class="md-form">
-                            <i class="fas fa-pen prefix" style="color: grey"></i>
-                            <label class="text-secondary font-weight-bold ml-1" for="name">Họ và tên</label>
-                            <input class="form-control" id="name" name="nameInput" type="text"
-                                placeholder="Trần Đặng Thị Bích Vân">
-                        </div>
-
-                        <!-- Salary input -->
-                        <div class="md-form">
-                            <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
-                            <label class="text-secondary font-weight-bold ml-1" for="salary">Lương</label>
-                            <input class="form-control" id="salary" name="salaryInput" type="text" placeholder="0"
-                                required>
-                        </div>
-                    </div>
-
-                    <!-- Modal footer -->
-                    <div class="modal-footer d-flex justify-content-end py-2">
-                        <button class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                        <button class="btn btn-primary" id="add">Thêm</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit Modal -->
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content shadow rounded">
-
-                <!-- Modal header -->
-                <div class="modal-header text-center bg-primary text-white">
-                    <h4 class="modal-title w-100 font-weight-bold">SỬA THÔNG TIN CŨ</h4>
-                    <button class="close" data-dismiss="modal" type="button">&times;</button>
-                </div>
-
-                <!-- Modal body -->
-                <div class="modal-body mx-3">
-                    <!-- Name input -->
-                    <div class="md-form">
-                        <i class="fas fa-pen prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1" for="name">Họ và tên</label>
-                        <input class="form-control" id="name" name="nameInput" type="text"
-                            placeholder="Trần Đặng Thị Bích Vân" required>
-                    </div>
-
-                    <!-- Salary input -->
-                    <div class="md-form">
-                        <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1" for="salary">Lương</label>
-                        <input class="form-control" id="salary" name="salaryInput" type="text" placeholder="0" required>
-                    </div>
-                </div>
-
-                <!-- Modal footer -->
-                <div class="modal-footer d-flex justify-content-end py-2">
-                    <button class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button class="btn btn-primary" id="edit">Sửa</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--=============================================== End of Modals ========================================-->
-
+    <!--===============================================> CDN links ============================================-->
     <!-- Bootstrap Jquery CDN links -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -235,8 +145,10 @@
     <script type="text/javascript" src="assets/lib/tableExport.jquery.plugin-master/tableExport.min.js"></script>
 
     <!-- Bootstrap-datatable -->
-    <script src="assets/lib/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
-    <script src="assets/lib/bootstrap-table-master/dist/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/extensions/export/bootstrap-table-export.min.js">
+    </script>
+    <!--=========================================== End of CDN links ============================================-->
 
     <!-- javaScript links -->
     <script type="text/javaScript" src="src/scripts/helpers.js"></script>

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // Initialize index and profile counter of the last profile
+    // Initialize profile counter (profile index)
     var counter = 2;
 
     // Initialize salary profile data for worksheet
@@ -16,7 +16,7 @@ $(document).ready(function () {
     ];
 
     // Initialize datatable
-    var $table = $('#table');
+    var $table = $('#dataTable');
     $table.bootstrapTable({
         data: ws_data
     });
@@ -53,18 +53,20 @@ $(document).ready(function () {
     control.addEventListener("change", function (event) {
         var loadFile = document.querySelector("#import").files[0];
 
+        // Load data to dataTable
         var reader = new FileReader();
         reader.onload = function (event) {
             var contents = event.target.result;
             importData = getParsedJsonFromText(contents);
-            console.log(importData);
             $table.bootstrapTable('load', importData.data);
         };
 
+        // Error notification
         reader.onerror = function (event) {
             console.error("File could not be read! Code " + event.target.error.code);
         };
 
+        // Read data from JSON File
         reader.readAsText(loadFile, "UTF-8");
     }, false);
 
@@ -78,13 +80,14 @@ $(document).ready(function () {
                 "Lương": $('#add_salary').val()
             }
         });
+
         // Empty input and close modal
         closeAddModal();
     });
 
+    // Stop action if no row is selected 
     $('#edit').on('click', function (e) {
         let selectedIndex = getIdSelection($table);
-        // Check if no row is selected
         if (selectedIndex === -1) {
             alert("Vui lòng chọn dòng cần sửa");
             e.stopPropagation();
@@ -93,8 +96,8 @@ $(document).ready(function () {
 
     // Edit selected profile
     $('#edit_save').on('click', function () {
+        // Update row by selected index
         let selectedIndex = getIdSelection($table);
-        // Update row
         $table.bootstrapTable('updateRow', {
             index: selectedIndex - 1,
             row: {
@@ -102,20 +105,25 @@ $(document).ready(function () {
                 "Lương": $('#edit_salary').val()
             }
         });
+
         // Empty input and close modal
         closeEditModal();
     });
+
     // Remove selected profile
     $('#remove').on('click', function (e) {
         let selectedIndex = getIdSelection($table);
-        // Check if no row is selected
+        // Stop action if no row is selected
         if (selectedIndex === -1) {
             alert("Vui lòng chọn dòng cần xóa");
             e.stopPropagation();
         }
 
+        // Remove row by selected index
         $table.bootstrapTable('removeByUniqueId', selectedIndex);
         counter--;
+
+        // Update indexes of profiles after the removed profile
         for (let index = selectedIndex; index <= counter; index++) {
             $table.bootstrapTable('updateCellByUniqueId', {
                 id: index + 1,
@@ -124,4 +132,12 @@ $(document).ready(function () {
             });
         }
     });
+
+    // Switch over to tax datatable page
+    $("#tax").on("click", function () {
+        let taxData = $table.bootstrapTable('getData');
+        saveDataToLocalStorage("dataTable", taxData);
+        window.location.href = '../BizApp/tax.html';
+    });
+
 });
