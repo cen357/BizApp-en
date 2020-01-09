@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chương trình thuế</title>
+
+    <!--===============================================> CDN links ============================================-->
+    <!-- Bootstrap 4 CDN link-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Font awsome link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+        integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+
+    <!-- Bootstrap dataTables link -->
+    <link rel="stylesheet" href="assets/lib/bootstrap-table-master/dist/bootstrap-table.min.css">
+
+    <!-- Filesaver CDN link -->
+    <script src="assets/lib/FileSaver.js-master/dist/FileSaver.min.js"></script>
+
+    <!-- Sheetjs CDN link -->
+    <script type="text/javaScript" src="assets/lib/sheetjs-master/xlsx.mini.js"></script>
+    <!--=========================================== End of CDN links ============================================-->
+
+    <!-- CSS links -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="src/styles/style.css">
+
+</head>
+
+<body>
+    <div class="app">
+        <!--============================================ Header =================================================-->
+        <!-- Navigation bar -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">BizApp</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Trang chủ<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Thông tin</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Apps
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Chương trình 1</a>
+                            <a class="dropdown-item" href="#">Chương trình 2</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Chương trình 3</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                </form>
+            </div>
+        </nav>
+        <!--=========================================== End of header ================================================-->
+
+        <!--============================================== Content ===================================================-->
+        <div class="container">
+            <!-- Month title -->
+            <div id="month" class="title text-center p-2">
+                <h1>Chương trình thuế</h1>
+            </div>
+
+            <!-- Button group -->
+            <div class="d-flex justify-content-start align-items-center button-group">
+                <!-- Summary button -->
+                <button class="btn btn-info btn-lg p-2 mr-auto" type="button" data-toggle="collapse"
+                    data-target="#summary" aria-expanded="false" aria-controls="summary">
+                    Tổng hợp
+                </button>
+
+                <!-- Ultilities button -->
+                <input type="file" name="import" id="import" multiple>
+                <button class="btn btn-lg btn-primary p-2" data-toggle="modal" data-target="#addModal">Thêm</button>
+                <button class="btn btn-lg btn-secondary p-2" data-toggle="modal" data-target="#editModal">Sửa</button>
+                <button class="btn btn-lg btn-danger p-2" id="remove">Xóa</button>
+                <button class="btn btn-lg btn-success p-2" id="download">Tải về máy</button>
+            </div>
+
+            <!-- Summary content -->
+            <div class="collapse" id="summary">
+                <div class="card card-body">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                </div>
+            </div>
+
+            <!-- Data Table  -->
+            <table id="table" data-show-export="true" data-pagination="true" data-side-pagination="server"
+                data-click-to-select="true" data-toolbar="#toolbar" data-show-toggle="true" data-show-columns="true"
+                class="tabletable-striped table-bordered" style="width: 100%;">
+                <thead class="text-center table-header">
+                    <tr>
+                        <th data-field="state" data-checkbox="true"></th>
+                        <th data-field="STT">STT</th>
+                        <th data-field="Họ và tên">Họ và tên</th>
+                        <th data-field="Lương">Lương</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--====================================== End of content =================================================-->
+
+    <!--=========================================== Modals ====================================================-->
+
+    <!-- Add Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content shadow rounded">
+
+                <!-- Modal header -->
+                <div class="modal-header text-center bg-primary text-white">
+                    <h4 class="modal-title w-100 font-weight-bold">THÊM THÔNG TIN MỚI</h4>
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div id="test">
+                    <div class="modal-body mx-3">
+                        <!-- Name input -->
+                        <div class="md-form">
+                            <i class="fas fa-pen prefix" style="color: grey"></i>
+                            <label class="text-secondary font-weight-bold ml-1" for="name">Họ và tên</label>
+                            <input class="form-control" id="name" name="nameInput" type="text"
+                                placeholder="Trần Đặng Thị Bích Vân">
+                        </div>
+
+                        <!-- Salary input -->
+                        <div class="md-form">
+                            <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
+                            <label class="text-secondary font-weight-bold ml-1" for="salary">Lương</label>
+                            <input class="form-control" id="salary" name="salaryInput" type="text" placeholder="0"
+                                required>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer d-flex justify-content-end py-2">
+                        <button class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                        <button class="btn btn-primary" id="add">Thêm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content shadow rounded">
+
+                <!-- Modal header -->
+                <div class="modal-header text-center bg-primary text-white">
+                    <h4 class="modal-title w-100 font-weight-bold">SỬA THÔNG TIN CŨ</h4>
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body mx-3">
+                    <!-- Name input -->
+                    <div class="md-form">
+                        <i class="fas fa-pen prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1" for="name">Họ và tên</label>
+                        <input class="form-control" id="name" name="nameInput" type="text"
+                            placeholder="Trần Đặng Thị Bích Vân" required>
+                    </div>
+
+                    <!-- Salary input -->
+                    <div class="md-form">
+                        <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
+                        <label class="text-secondary font-weight-bold ml-1" for="salary">Lương</label>
+                        <input class="form-control" id="salary" name="salaryInput" type="text" placeholder="0" required>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer d-flex justify-content-end py-2">
+                    <button class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button class="btn btn-primary" id="edit">Sửa</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--=============================================== End of Modals ========================================-->
+
+    <!-- Bootstrap Jquery CDN links -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <!-- Table export CDNs -->
+    <script type="text/javascript" src="assets/lib/tableExport.jquery.plugin-master/libs/FileSaver/FileSaver.min.js">
+    </script>
+
+    <script type="text/javascript" src="assets/lib/tableExport.jquery.plugin-master/libs/js-xlsx/xlsx.core.min.js">
+    </script>
+
+    <script type="text/javascript" src="assets/lib/tableExport.jquery.plugin-master/libs/jsPDF/jspdf.min.js"></script>
+    <script type="text/javascript"
+        src="assets/lib/tableExport.jquery.plugin-master/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js"></script>
+
+    <script type="text/javascript"
+        src="assets/lib/tableExport.jquery.plugin-master/libs/es6-promise/es6-promise.auto.min.js"></script>
+    <script type="text/javascript"
+        src="assets/lib/tableExport.jquery.plugin-master/libs/html2canvas/html2canvas.min.js"></script>
+
+    <script type="text/javascript" src="assets/lib/tableExport.jquery.plugin-master/tableExport.min.js"></script>
+
+    <!-- Bootstrap-datatable -->
+    <script src="assets/lib/bootstrap-table-master/dist/bootstrap-table.min.js"></script>
+    <script src="assets/lib/bootstrap-table-master/dist/extensions/export/bootstrap-table-export.min.js"></script>
+
+    <!-- javaScript links -->
+    <script type="text/javaScript" src="src/scripts/helpers.js"></script>
+    <script type="text/javaScript" src="src/scripts/functionality.js"></script>
+    <script type="text/javaScript" src="src/scripts/test.js"></script>
+</body>
+
+</html>
