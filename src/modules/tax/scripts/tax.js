@@ -4,13 +4,13 @@ $(document).ready(function () {
     let getCounter = getDataFromLocalStorage("counter");
 
     // Calculate tax data 
-    let overtimeData = calcData(getTransferData);
-    overtimeData.push(calcSumRow(overtimeData));
+    let taxData = calcTaxData(getTransferData);
+    taxData.push(calcTaxSumRow(taxData));
 
     // Initialize tax datatable
-    let $overtimeTable = $('#overtimeTable');
-    $overtimeTable.bootstrapTable({
-        data: overtimeData
+    let $taxTable = $('#taxTable');
+    $taxTable.bootstrapTable({
+        data: taxData
     });
 
     // Update Summary
@@ -20,10 +20,29 @@ $(document).ready(function () {
 
     // Switch back to info page
     $("#back").on("click", function () {
-        $overtimeTable.bootstrapTable('destroy');
+        $taxTable.bootstrapTable('destroy');
         localStorage.clear();
-        window.location.href = '../BizApp/index.html';
+        window.location.href = '../../../index.html';
     });
+
+    /** Function description: 
+     *      Get data from local storage
+     *  Parameters: 
+     *      + Data key
+     *  Returns: 
+     *      - Formatted json data or normal data
+     */
+    function getDataFromLocalStorage(dataKey) {
+        let data = window.localStorage.getItem(dataKey);
+        let formattedData = null;
+        try {
+            formattedData = JSON.parse(data);
+        } catch (e) {
+            //get normal data if not json
+            formattedData = data;
+        }
+        return formattedData;
+    }
 
     /** Function description: 
      *      Calculate data for one row of the table
@@ -32,24 +51,12 @@ $(document).ready(function () {
      *  Returns: 
      *      - Oject of row data 
      */
-    function calcRowData(row) {
-        let overtimeDays = ((row['5']) / 8).toFixed(2);
-        let bonusPerDay = row['6'] * row['7'];
-        let overtimeSalary = (bonusPerDay + row['7']) * overtimeDays;
-        let sum = overtimeSalary + overtimeSalary;
+    function calcTaxRowData(row) {
         let data = {
             'A': row['A'],
             'B': row['B'],
-            '1': row['C'],
-            '2': row['5'],
-            '3': overtimeDays,
-            '4': row['7'],
-            '5': row['6'],
-            '6': bonusPerDay,
-            '7': overtimeSalary,
-            '8': overtimeSalary,
-            '9': sum,
-            'C': ''
+            '1': row['1'],
+            '2=1*15%': (row['1'] * 15) / 100
         };
         return data;
     }
@@ -57,47 +64,40 @@ $(document).ready(function () {
     /** Function description: 
      *      Calculate data for tax table
      *  Parameters: 
-     *      + table: table data
+     *      + table: taxData
      *  Returns: 
      *      - Array of objects of table data
      */
-    function calcData(table) {
+    function calcTaxData(table) {
         let data = [];
         table.forEach(element => {
-            data.push(calcRowData(element));
+            data.push(calcTaxRowData(element));
         });
+
         return data;
     }
 
     /** Function description: 
      *      Calculate sum row data at the end of the table
      *  Parameters: 
-     *      + data: table data
+     *      + data
      *  Returns: 
      *      - Object of sum row data
      */
-    function calcSumRow(data) {
-        let overtimeSalarySum = 0;
-        let totalSum = 0;
+    function calcTaxSumRow(data) {
+        let salarySum = 0;
+        let taxSum = 0;
 
         data.forEach(element => {
-            overtimeSalarySum += Number(element['7']);
-            totalSum += Number(element['9']);
+            salarySum += Number(element['1']);
+            taxSum += Number(element['2=1*15%']);
         });
 
         let sumRow = {
             'A': '',
             'B': 'Tổng cộng',
-            '1': '',
-            '2': '',
-            '3': '',
-            '4': '',
-            '5': '',
-            '6': '',
-            '7': overtimeSalarySum,
-            '8': overtimeSalarySum,
-            '9': totalSum,
-            'C': ''
+            '1': salarySum,
+            '2=1*15%': taxSum
         };
 
         return sumRow;
