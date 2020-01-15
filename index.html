@@ -40,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Trang chủ<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">Trang chủ<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Thông tin</a>
@@ -71,7 +71,7 @@
 
                 <!-- Profit info button -->
                 <button type="button" id="info" class="btn btn-lg btn-warning p-2 text-white" data-toggle="modal"
-                    data-target="#infoModal">Thêm thông tin</button>
+                    data-target="#infoModal">Thêm thông tin tổng hợp</button>
 
                 <!-- Profit display -->
                 <h2 id="infoDisplay" class="d-none">Doanh thu tháng <span id="time"></span> = <span id="profit"></span>
@@ -82,7 +82,7 @@
             <!-- Button group -->
             <div class="d-flex flex-wrap justify-content-start align-items-center button-group">
                 <!-- Generated tables button -->
-                <button class="btn btn-lg btn-primary p-2 mr-auto bg-gradient" type="button" data-toggle="collapse"
+                <button id="generateButton" class="btn btn-lg btn-primary p-2 mr-auto bg-gradient" type="button" data-toggle="collapse"
                     data-target="#generate">
                     Tạo bảng
                 </button>
@@ -171,15 +171,16 @@
                         <i class="fas fa-calendar prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_time">Nhập thời gian
                             (tháng/năm)</label>
-                        <input class="form-control" id="add_time" name="timeInput" type="text" placeholder="12/2019">
+                        <input class="form-control" id="add_time" name="timeInput" type="text" placeholder="12/2019"
+                            required>
                     </div>
 
                     <!-- Profit -->
                     <div class="md-form">
                         <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_profit">Nhập doanh thu</label>
-                        <input class="form-control" id="add_profit" name="profitInput" type="text"
-                            placeholder="900000000000000">
+                        <input class="form-control" id="add_profit" name="profitInput" type="number"
+                            placeholder="900000000000000" required>
                     </div>
                 </div>
 
@@ -214,6 +215,31 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
                     <button type="submit" class="btn btn-success" id="upload_save">Lưu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Warning modal -->
+    <div class="modal fade" id="warningModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content shadow rounded">
+
+                <!-- Modal header -->
+                <div class="modal-header text-center bg-secondary text-white">
+                    <h4 class="modal-title w-100 font-weight-bold">THÔNG BÁO</h4>
+                    <button class="close" data-dismiss="modal" type="button">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body mx-3">
+                    <div class="text-info font-weight-bold">Vui lòng nhấn vào dòng cần thực hiện thao tác
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>

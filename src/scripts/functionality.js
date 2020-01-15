@@ -4,12 +4,12 @@ $(document).ready(function () {
 
     counter = 2;
 
-    // Initialize info data of the data table
-    let infoData;
+    // Initialize info data
+    let Info;
 
-    infoData = {
-        time: "",
-        profit: ""
+    Info = {
+        time: "1",
+        profit: 0
     };
 
     // Initialize salary profile data for worksheet
@@ -45,6 +45,16 @@ $(document).ready(function () {
     $table.bootstrapTable({
         data: profileData
     });
+
+    // Generate button is only available if table is not empty and profit is added
+    window.setInterval(function () {
+        let generate = document.querySelector('#generateButton');
+        if ((counter === 0) && (Info.profit === 0)) {
+            generate.disabled = true;
+        } else {
+            generate.disabled = false;
+        }
+    }, 1);
 
     // Download function
     var $toolbar;
@@ -95,10 +105,10 @@ $(document).ready(function () {
     // Add information below title
     $('#info').on('click', function () {
         $('#info_save').on('click', function () {
-            infoData.time = $('#add_time').val();
-            infoData.profit = $('#add_profit').val();
-            $('#infoDisplay #time').text(infoData.time);
-            $('#infoDisplay #profit').text(infoData.profit);
+            Info.time = $('#add_time').val();
+            Info.profit = $('#add_profit').val();
+            $('#infoDisplay #time').text(Info.time);
+            $('#infoDisplay #profit').text(Info.profit);
             $('#info').addClass('d-none');
             $('#infoDisplay').removeClass('d-none');
             closeInfoModal();
@@ -160,12 +170,12 @@ $(document).ready(function () {
         });
     });
 
-    // Stop action if no row is selected 
+    // Stop action and show warning if no row is selected 
     $('#edit').on('click', function (e) {
         let selectedIndex;
         selectedIndex = getIdSelection($table);
         if (selectedIndex === -1) {
-            alert("Vui lòng chọn dòng cần sửa");
+            $('#warningModal').modal('show');
             e.stopPropagation();
         }
     });
@@ -197,9 +207,9 @@ $(document).ready(function () {
     $('#remove').on('click', function (e) {
         let selectedIndex = getIdSelection($table);
 
-        // Stop action if no row is selected
+        // Stop action and show warning if no row is selected
         if (selectedIndex === -1) {
-            alert("Vui lòng chọn dòng cần xóa");
+            $('#warningModal').modal('show');
             e.stopPropagation();
         }
 
@@ -222,7 +232,7 @@ $(document).ready(function () {
         // Save data from table to local storage for transfer
         let setTransferData = $table.bootstrapTable('getData');
         saveDataToLocalStorage("dataTable", setTransferData);
-        saveDataToLocalStorage("infoData", infoData);
+        saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
         window.location.href = '../BizApp/tax.html';
     });
@@ -232,7 +242,7 @@ $(document).ready(function () {
         // Save data from table to local storage for transfer
         let setTransferData = $table.bootstrapTable('getData');
         saveDataToLocalStorage("dataTable", setTransferData);
-        saveDataToLocalStorage("infoData", infoData);
+        saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
         window.location.href = '../BizApp/tax.html';
     });
@@ -242,7 +252,7 @@ $(document).ready(function () {
         // Save data from table to local storage for transfer
         let setTransferData = $table.bootstrapTable('getData');
         saveDataToLocalStorage("dataTable", setTransferData);
-        saveDataToLocalStorage("infoData", infoData);
+        saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
         window.location.href = '../BizApp/tax.html';
     });
@@ -252,7 +262,7 @@ $(document).ready(function () {
         // Save data from table to local storage for transfer
         let setTransferData = $table.bootstrapTable('getData');
         saveDataToLocalStorage("dataTable", setTransferData);
-        saveDataToLocalStorage("infoData", infoData);
+        saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
         window.location.href = '../BizApp/tax.html';
     });
@@ -262,7 +272,7 @@ $(document).ready(function () {
         // Save data from table to local storage for transfer
         let setTransferData = $table.bootstrapTable('getData');
         saveDataToLocalStorage("dataTable", setTransferData);
-        saveDataToLocalStorage("infoData", infoData);
+        saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
         window.location.href = '../BizApp/tax.html';
     });
@@ -272,7 +282,7 @@ $(document).ready(function () {
         // Save data from table to local storage for transfer
         let setTransferData = $table.bootstrapTable('getData');
         saveDataToLocalStorage("dataTable", setTransferData);
-        saveDataToLocalStorage("infoData", infoData);
+        saveDataToLocalStorage("infoData", Info);
         saveDataToLocalStorage("counter", counter);
         window.location.href = '../BizApp/tax.html';
     });
