@@ -1,15 +1,21 @@
 $(document).ready(function () {
     // Initialize profile counter (profile index)
-    var counter = 2;
+    let counter;
+
+    counter = 2;
 
     // Initialize info data of the data table
-    var infoData = {
+    let infoData;
+
+    infoData = {
         time: "",
         profit: ""
     };
 
     // Initialize salary profile data for worksheet
-    var profileData = [{
+    let profileData;
+
+    profileData = [{
             "A": 1,
             "B": "Anthony",
             "C": "Developer",
@@ -34,13 +40,15 @@ $(document).ready(function () {
     ];
 
     // Initialize datatable
-    var $table = $('#dataTable');
+    var $table;
+    $table = $('#dataTable');
     $table.bootstrapTable({
         data: profileData
     });
 
     // Download function
-    var $toolbar = $('#toolbar');
+    var $toolbar;
+    $toolbar = $('#toolbar');
     $(function () {
         $toolbar.find('select').change(function () {
             $table.bootstrapTable('destroy').bootstrapTable({
@@ -100,15 +108,17 @@ $(document).ready(function () {
 
     // Read imported Json File from local machine
     $('#upload').on('click', function () {
-        var control = document.querySelector("#file");
-        var importData;
+        let control;
+        control = document.querySelector("#file");
+
+        let importData;
         control.addEventListener("change", function (event) {
-            var loadFile = document.querySelector("#file").files[0];
+            let loadFile = document.querySelector("#file").files[0];
 
             // Load data to dataTable
-            var reader = new FileReader();
+            let reader = new FileReader();
             reader.onload = function (event) {
-                var contents = event.target.result;
+                let contents = event.target.result;
                 importData = getParsedJson(contents);
             };
 
@@ -128,23 +138,32 @@ $(document).ready(function () {
     });
 
     // Add new profile
-    $("#add_save").on('click', function (e) {
-        $table.bootstrapTable('insertRow', {
-            index: counter,
-            row: {
-                "A": ++counter,
-                "B": $('#add_name').val(),
-                "1": Number($('#add_salary').val())
-            }
+    $('#add').on('click', function () {
+        $("#add_save").on('click', function (e) {
+            $table.bootstrapTable('insertRow', {
+                index: counter,
+                row: {
+                    "A": ++counter,
+                    "B": $('#add_name').val(),
+                    "C": $('#add_job').val(),
+                    "1": Number($('#add_taxId').val()),
+                    "2": Number($('#add_salary').val()),
+                    "3": Number($('#add_workdays').val()),
+                    "4": Number($('#add_cafe').val()),
+                    "5": Number($('#add_overtime').val()),
+                    "6": Number($('#add_bonus').val())
+                }
+            });
+            console.log($table.bootstrapTable('getData'));
+            // Empty input and close modal
+            closeAddModal();
         });
-        console.log($table.bootstrapTable('getData'));
-        // Empty input and close modal
-        closeAddModal();
     });
 
     // Stop action if no row is selected 
     $('#edit').on('click', function (e) {
-        let selectedIndex = getIdSelection($table);
+        let selectedIndex;
+        selectedIndex = getIdSelection($table);
         if (selectedIndex === -1) {
             alert("Vui lòng chọn dòng cần sửa");
             e.stopPropagation();
@@ -154,12 +173,19 @@ $(document).ready(function () {
     // Edit selected profile
     $('#edit_save').on('click', function () {
         // Update row by selected index
-        let selectedIndex = getIdSelection($table);
+        let selectedIndex;
+        selectedIndex = getIdSelection($table);
         $table.bootstrapTable('updateRow', {
             index: selectedIndex - 1,
             row: {
                 "B": $('#edit_name').val(),
-                "1": Number($('#edit_salary').val())
+                "C": $('#edit_job').val(),
+                "1": Number($('#edit_taxId').val()),
+                "2": Number($('#edit_salary').val()),
+                "3": Number($('#edit_workdays').val()),
+                "4": Number($('#edit_cafe').val()),
+                "5": Number($('#edit_overtime').val()),
+                "6": Number($('#edit_bonus').val())
             }
         });
 
