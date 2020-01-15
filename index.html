@@ -237,7 +237,7 @@
                         <i class="fas fa-pen prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_name">Họ và tên</label>
                         <input class="form-control" id="add_name" name="nameInput" type="text"
-                            placeholder="Nguyễn Văn A">
+                            placeholder="Nguyễn Văn A" required>
                     </div>
 
                     <!-- Job title input -->
@@ -253,23 +253,24 @@
                     <div class="md-form">
                         <i class="fas fa-address-card prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_taxId">Mã số thuế</label>
-                        <input class="form-control" id="add_taxId" name="taxIdInput" type="text"
-                            placeholder="8015731510">
+                        <input class="form-control" id="add_taxId" name="taxIdInput" type="number"
+                            placeholder="8015731510" required>
                     </div>
 
                     <!-- Base salary input -->
                     <div class="md-form">
                         <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_salary">Mức lương</label>
-                        <input class="form-control" id="add_salary" name="salaryInput" type="text"
-                            placeholder="5000000">
+                        <input class="form-control" id="add_salary" name="salaryInput" type="number"
+                            placeholder="5000000" required>
                     </div>
 
                     <!-- Workdays input -->
                     <div class="md-form">
                         <i class="fas fa-calendar prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="workdays">Ngày công</label>
-                        <input class="form-control" id="add_workdays" name="workdaysInput" type="text" placeholder="25">
+                        <input class="form-control" id="add_workdays" name="workdaysInput" type="number"
+                            placeholder="25" required>
                     </div>
 
                     <!-- Cafeteria days input -->
@@ -277,14 +278,16 @@
                         <i class="fas fa-hamburger prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_cafe">Ngày công (tiền
                             cơm)</label>
-                        <input class="form-control" id="add_cafe" name="cafeInput" type="text" placeholder="25">
+                        <input class="form-control" id="add_cafe" name="cafeInput" type="number" placeholder="25"
+                            required>
                     </div>
 
                     <!-- Overtime hours input -->
                     <div class="md-form">
                         <i class="fas fa-clock prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_overtime">Giờ làm thêm</label>
-                        <input class="form-control" id="add_overtime" name="overtimeInput" type="text" placeholder="16">
+                        <input class="form-control" id="add_overtime" name="overtimeInput" type="number"
+                            placeholder="16" required>
                     </div>
 
                     <!-- Bonus rate input -->
@@ -292,7 +295,8 @@
                         <i class="fas fa-percent prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_bonus">Tỉ lệ % khoản bổ
                             sung</label>
-                        <input class="form-control" id="add_bonus" name="bonusInput" type="text" placeholder="38">
+                        <input class="form-control" id="add_bonus" name="bonusInput" type="number" placeholder="38"
+                            required>
                     </div>
                 </div>
 
@@ -341,7 +345,7 @@
                     <div class="md-form">
                         <i class="fas fa-address-card prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_taxId">Mã số thuế</label>
-                        <input class="form-control" id="edit_taxId" name="TaxIdInput" type="text"
+                        <input class="form-control" id="edit_taxId" name="TaxIdInput" type="number"
                             placeholder="8015731510" required>
                     </div>
 
@@ -349,15 +353,15 @@
                     <div class="md-form">
                         <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_salary">Mức Lương</label>
-                        <input class="form-control" id="edit_salary" name="salaryInput" type="text"
+                        <input class="form-control" id="edit_salary" name="salaryInput" type="number"
                             placeholder="3000000" required>
                     </div>
                     <!-- Workdays input -->
                     <div class="md-form">
                         <i class="fas fa-calendar prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_workdays">Ngày công</label>
-                        <input class="form-control" id="edit_workdays" name="workdaysInput" type="text" placeholder="16"
-                            required>
+                        <input class="form-control" id="edit_workdays" name="workdaysInput" type="number"
+                            placeholder="16" required>
                     </div>
 
                     <!-- Cafeteria days input -->
@@ -365,7 +369,7 @@
                         <i class="fas fa-hamburger prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_cafe">Ngày công (Tiền
                             cơm)</label>
-                        <input class="form-control" id="edit_cafe" name="cafeInput" type="text" placeholder="16"
+                        <input class="form-control" id="edit_cafe" name="cafeInput" type="number" placeholder="16"
                             required>
                     </div>
 
@@ -374,8 +378,8 @@
                         <i class="fas fa-clock prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_overtime">Giờ làm
                             thêm</label>
-                        <input class="form-control" id="edit_overtime" name="overtimeInput" type="text" placeholder="10"
-                            required>
+                        <input class="form-control" id="edit_overtime" name="overtimeInput" type="number"
+                            placeholder="10" required>
                     </div>
 
                     <!-- Bonus rate input -->
@@ -383,7 +387,7 @@
                         <i class="fas fa-percent prefix" style="color: grey"></i>
                         <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_bonus">Tỉ lệ % khoản bổ
                             sung</label>
-                        <input class="form-control" id="edit_bonus" name="bonusInput" type="text" placeholder="20"
+                        <input class="form-control" id="edit_bonus" name="bonusInput" type="number" placeholder="20"
                             required>
                     </div>
                 </div>
