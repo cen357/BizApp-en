@@ -40,10 +40,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Trang chủ<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Thông tin</a>
+                        <a class="nav-link" href="#">Info</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -51,13 +51,13 @@
                             Apps
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="index.html">Thông tin nhân viên</a>
+                            <a class="dropdown-item" href="index.html">Employee information</a>
                         </div>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Tìm kiếm</button>
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>
         </nav>
@@ -67,14 +67,14 @@
         <div class="container">
             <!-- Title -->
             <div id="title" class="text-center">
-                <h1 class="title">Thông tin nhân viên <span id="month"></span></h1>
+                <h1 class="title">Employee Information<span id="month"></span></h1>
 
                 <!-- Profit info button -->
                 <button type="button" id="info" class="btn btn-lg btn-warning p-2 text-white" data-toggle="modal"
-                    data-target="#infoModal">Thêm thông tin tổng hợp</button>
+                    data-target="#infoModal">Add Company Info</button>
 
                 <!-- Profit display -->
-                <h2 id="infoDisplay" class="d-none">Doanh thu tháng <span id="time"></span> = <span id="profit"></span>
+                <h2 id="infoDisplay" class="d-none">Month <span id="time"></span> ; Profit = <span id="profit"></span>
                     VND
                 </h2>
             </div>
@@ -83,35 +83,35 @@
             <div class="d-flex flex-wrap justify-content-start align-items-center button-group">
                 <!-- Generated tables button -->
                 <span class="mr-auto" data-toggle="tooltip" data-placement="top"
-                    title="Bảng phải có ít nhất 1 dòng và có thông tin thông tin tổng hợp">
+                    title="Must have at least one row in a table and company info">
                     <button id="generateButton" class="btn btn-lg btn-primary p-2 bg-gradient" type="button"
                         data-toggle="collapse" data-target="#generate">
-                        Tạo bảng
+                        Generate tables
                     </button>
                 </span>
 
                 <!-- Import JSON file -->
                 <button type="button" id="upload" class="btn btn-lg btn-success p-2" data-toggle="modal"
                     data-target="#uploadModal">
-                    Tải lên</button>
+                    Upload</button>
 
                 <!-- Ultilities button -->
                 <button class="btn btn-lg btn-primary p-2" id="add" data-toggle="modal"
-                    data-target="#addModal">Thêm</button>
+                    data-target="#addModal">Add</button>
                 <button class="btn btn-lg btn-secondary p-2" id="edit" data-toggle="modal"
-                    data-target="#editModal">Sửa</button>
-                <button class="btn btn-lg btn-danger p-2" id="remove">Xóa</button>
+                    data-target="#editModal">Fix</button>
+                <button class="btn btn-lg btn-danger p-2" id="remove">Remove</button>
             </div>
 
             <div class="collapse" id="generate">
                 <div class="card card-body">
                     <div class="d-flex flex-wrap justify-content-center align-items-center p-2">
-                        <button class="btn btn-lg btn-secondary p-2 m-1 order-1" id="timesheet">Chấm Công</button>
-                        <button class="btn btn-lg btn-secondary p-2 m-1 order-2" id="overtime">Giờ Làm Thêm</button>
-                        <button class="btn btn-lg btn-secondary p-2 m-1 order-3" id="cafe">Tiền Cơm</button>
-                        <button class="btn btn-lg btn-secondary p-2 m-1 order-4" id="profit">Doanh Thu</button>
-                        <button class="btn btn-lg btn-secondary p-2 m-1 order-5" id="tax">Thuế TNCN</button>
-                        <button class="btn btn-lg btn-secondary p-2 m-1 order-6" id="salary">Lương</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-1" id="timesheet">Timesheet</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-2" id="overtime">Overtime</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-3" id="cafe">Cafeteria</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-4" id="profit">Profit</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-5" id="tax">Tax</button>
+                        <button class="btn btn-lg btn-secondary p-2 m-1 order-6" id="salary">Salary</button>
                     </div>
                 </div>
             </div>
@@ -125,16 +125,16 @@
             <thead class="text-center table-header">
                 <tr>
                     <th></th>
-                    <th>STT</th>
-                    <th>Họ và tên</th>
-                    <th>Chức danh nghề nghiệp</th>
-                    <th>Mã số thuế</th>
-                    <th>Mức lương</th>
-                    <th>Ngày công</th>
-                    <th>Ngày công thực tế (tính tiền cơm)</th>
-                    <th>Giờ làm thêm</th>
-                    <th>Tỉ lệ % khoản bổ sung</th>
-                    <th>Số người phụ thuộc BHYT</th>
+                    <th>Index</th>
+                    <th>Full name</th>
+                    <th>Job title</th>
+                    <th>Tax ID</th>
+                    <th>Base salary</th>
+                    <th>Workdays</th>
+                    <th>Cafe days</th>
+                    <th>Overtime hours</th>
+                    <th>Bonus rate</th>
+                    <th>Number of health insurance dependents</th>
                 </tr>
 
                 <tr>
@@ -165,7 +165,7 @@
 
                 <!-- Modal header -->
                 <div class="modal-header text-center bg-warning text-white">
-                    <h4 class="modal-title w-100 font-weight-bold">THÔNG TIN TỔNG HỢP</h4>
+                    <h4 class="modal-title w-100 font-weight-bold">COMPANY INFORMATION</h4>
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
                 </div>
 
@@ -174,8 +174,7 @@
                     <!-- Time -->
                     <div class="md-form">
                         <i class="fas fa-calendar prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_time">Nhập thời gian
-                            (tháng/năm)</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_time">Month</label>
                         <input class="form-control" id="add_time" name="timeInput" type="text" placeholder="12/2019"
                             required>
                     </div>
@@ -183,7 +182,7 @@
                     <!-- Profit -->
                     <div class="md-form">
                         <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_profit">Nhập doanh thu</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_profit">Profit</label>
                         <input class="form-control" id="add_profit" name="profitInput" type="number"
                             placeholder="900000000000000" required>
                     </div>
@@ -191,8 +190,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-warning" id="info_save">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-warning" id="info_save">Save</button>
                 </div>
             </div>
         </div>
@@ -205,21 +204,21 @@
 
                 <!-- Modal header -->
                 <div class="modal-header text-center bg-success text-white">
-                    <h4 class="modal-title w-100 font-weight-bold">TẢI LÊN</h4>
+                    <h4 class="modal-title w-100 font-weight-bold">UPLOAD</h4>
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body mx-3">
-                    <div class="mb-3 text-info font-weight-bold">Chọn file JSON từ máy (Ví dụ: ExportTable.json) </div>
+                    <div class="mb-3 text-info font-weight-bold">Upload JSON file (Example: ExportTable.json) </div>
                     <label for="file">JSON</label>
                     <input type="file" name="uploadInput" id="file">
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-success" id="upload_save">Lưu</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-success" id="upload_save">Save</button>
                 </div>
             </div>
         </div>
@@ -232,19 +231,19 @@
 
                 <!-- Modal header -->
                 <div class="modal-header text-center bg-secondary text-white">
-                    <h4 class="modal-title w-100 font-weight-bold">THÔNG BÁO</h4>
+                    <h4 class="modal-title w-100 font-weight-bold">WARNING</h4>
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
                 </div>
 
                 <!-- Modal body -->
                 <div class="modal-body mx-3">
-                    <div class="text-info font-weight-bold">Vui lòng chọn dòng cần thực hiện thao tác
+                    <div class="text-info font-weight-bold">Please choose a row for operation
                     </div>
                 </div>
 
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -257,7 +256,7 @@
 
                 <!-- Modal header -->
                 <div class="modal-header text-center bg-primary text-white">
-                    <h4 class="modal-title w-100 font-weight-bold">THÊM THÔNG TIN MỚI</h4>
+                    <h4 class="modal-title w-100 font-weight-bold">ADD EMPLOYEE INFORMATION</h4>
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
                 </div>
 
@@ -266,7 +265,7 @@
                     <!-- Name input -->
                     <div class="md-form">
                         <i class="fas fa-pen prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_name">Họ và tên</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_name">Full Name</label>
                         <input class="form-control" id="add_name" name="nameInput" type="text"
                             placeholder="Nguyễn Văn A" required>
                     </div>
@@ -274,8 +273,7 @@
                     <!-- Job title input -->
                     <div class="md-form">
                         <i class="fas fa-suitcase prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_job">Chức danh nghề
-                            nghiệp</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_job">Job title</label>
                         <input class="form-control" id="add_job" name="jobInput" type="text" placeholder="Giám đốc"
                             required>
                     </div>
@@ -283,7 +281,7 @@
                     <!-- Tax ID input -->
                     <div class="md-form">
                         <i class="fas fa-address-card prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_taxId">Mã số thuế</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_taxId">Tax ID</label>
                         <input class="form-control" id="add_taxId" name="taxIdInput" type="number"
                             placeholder="8015731510" required>
                     </div>
@@ -291,7 +289,7 @@
                     <!-- Base salary input -->
                     <div class="md-form">
                         <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_salary">Mức lương</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_salary">Base Salary</label>
                         <input class="form-control" id="add_salary" name="salaryInput" type="number"
                             placeholder="5000000" required>
                     </div>
@@ -299,7 +297,7 @@
                     <!-- Workdays input -->
                     <div class="md-form">
                         <i class="fas fa-calendar prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="workdays">Ngày công</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="workdays">Workdays</label>
                         <input class="form-control" id="add_workdays" name="workdaysInput" type="number"
                             placeholder="25" required>
                     </div>
@@ -307,8 +305,7 @@
                     <!-- Cafeteria days input -->
                     <div class="md-form">
                         <i class="fas fa-hamburger prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_cafe">Ngày công thực tế (tính
-                            tiền cơm) - Nhập 0 nếu không có</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_cafe">Cafeteria days</label>
                         <input class="form-control" id="add_cafe" name="cafeInput" type="number" placeholder="25"
                             required>
                     </div>
@@ -316,7 +313,7 @@
                     <!-- Overtime hours input -->
                     <div class="md-form">
                         <i class="fas fa-clock prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_overtime">Giờ làm thêm</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_overtime">Overtime hours</label>
                         <input class="form-control" id="add_overtime" name="overtimeInput" type="number"
                             placeholder="16" required>
                     </div>
@@ -324,8 +321,7 @@
                     <!-- Bonus rate input -->
                     <div class="md-form">
                         <i class="fas fa-percent prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_bonus">Tỉ lệ % khoản bổ
-                            sung</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_bonus">Bonus rate</label>
                         <input class="form-control" id="add_bonus" name="bonusInput" type="number" placeholder="38"
                             required>
                     </div>
@@ -333,8 +329,7 @@
                     <!-- Number of people depend on insurance input -->
                     <div class="md-form">
                         <i class="fas fa-user prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_insurance">Số người phụ thuộc
-                            BHYT</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="add_insurance">Number of health insurance dependents</label>
                         <input class="form-control" id="add_insurance" name="insuranceInput" type="number"
                             placeholder="0" required>
                     </div>
@@ -342,8 +337,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer d-flex justify-content-end py-2">
-                    <button class="btn btn-secondary" id="add_cancel" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-primary" id="add_save">Lưu</button>
+                    <button class="btn btn-secondary" id="add_cancel" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="add_save">Save</button>
                 </div>
             </div>
         </div>
@@ -358,7 +353,7 @@
 
                 <!-- Modal header -->
                 <div class="modal-header text-center bg-primary text-white">
-                    <h4 class="modal-title w-100 font-weight-bold">SỬA THÔNG TIN CŨ</h4>
+                    <h4 class="modal-title w-100 font-weight-bold">Edit Employee Information</h4>
                     <button class="close" data-dismiss="modal" type="button">&times;</button>
                 </div>
 
@@ -367,7 +362,7 @@
                     <!-- Name input -->
                     <div class="md-form">
                         <i class="fas fa-pen prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_name">Họ và tên</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_name">Full Name</label>
                         <input class="form-control" id="edit_name" name="nameInput" type="text"
                             placeholder="Nguyễn Thị B" required>
                     </div>
@@ -375,8 +370,7 @@
                     <!-- Job title input -->
                     <div class="md-form">
                         <i class="fas fa-suitcase prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_job">Chức danh nghề
-                            nghiệp</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_job">Job titles</label>
                         <input class="form-control" id="edit_job" name="nameInput" type="text"
                             placeholder="Phó giám đốc" required>
                     </div>
@@ -384,7 +378,7 @@
                     <!-- Tax ID input -->
                     <div class="md-form">
                         <i class="fas fa-address-card prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_taxId">Mã số thuế</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_taxId">Tax ID</label>
                         <input class="form-control" id="edit_taxId" name="TaxIdInput" type="number"
                             placeholder="8015731510" required>
                     </div>
@@ -392,14 +386,14 @@
                     <!-- Base salary input -->
                     <div class="md-form">
                         <i class="fas fa-dollar-sign prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_salary">Mức Lương</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_salary">Base salary</label>
                         <input class="form-control" id="edit_salary" name="salaryInput" type="number"
                             placeholder="3000000" required>
                     </div>
                     <!-- Workdays input -->
                     <div class="md-form">
                         <i class="fas fa-calendar prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_workdays">Ngày công</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_workdays">Workdays</label>
                         <input class="form-control" id="edit_workdays" name="workdaysInput" type="number"
                             placeholder="16" required>
                     </div>
@@ -407,8 +401,7 @@
                     <!-- Cafeteria days input -->
                     <div class="md-form">
                         <i class="fas fa-hamburger prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_cafe">Ngày công thực tế (Tính
-                            tiền cơm) - Nhập 0 nếu không có</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_cafe">Cafeteria days</label>
                         <input class="form-control" id="edit_cafe" name="cafeInput" type="number" placeholder="16"
                             required>
                     </div>
@@ -416,8 +409,7 @@
                     <!-- Overtime hours input -->
                     <div class="md-form">
                         <i class="fas fa-clock prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_overtime">Giờ làm
-                            thêm</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_overtime">Overtime hours</label>
                         <input class="form-control" id="edit_overtime" name="overtimeInput" type="number"
                             placeholder="10" required>
                     </div>
@@ -425,8 +417,7 @@
                     <!-- Bonus rate input -->
                     <div class="md-form">
                         <i class="fas fa-percent prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_bonus">Tỉ lệ % khoản bổ
-                            sung</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_bonus">Bonus rate</label>
                         <input class="form-control" id="edit_bonus" name="bonusInput" type="number" placeholder="20"
                             required>
                     </div>
@@ -434,8 +425,7 @@
                     <!-- Number of people depend on insurance input -->
                     <div class="md-form">
                         <i class="fas fa-user prefix" style="color: grey"></i>
-                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_insurance">Số người phụ thuộc
-                            BHYT</label>
+                        <label class="text-secondary font-weight-bold ml-1 pt-2" for="edit_insurance">Number of health insurance dependents</label>
                         <input class="form-control" id="edit_insurance" name="insuranceInput" type="number"
                             placeholder="2" required>
                     </div>
@@ -443,8 +433,8 @@
 
                 <!-- Modal footer -->
                 <div class="modal-footer d-flex justify-content-end py-2">
-                    <button class="btn btn-secondary" id="edit_cancel" data-dismiss="modal">Hủy</button>
-                    <button type="submit" class="btn btn-primary" id="edit_save">Lưu</button>
+                    <button class="btn btn-secondary" id="edit_cancel" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="edit_save">Save</button>
                 </div>
             </div>
         </div>
